@@ -9,6 +9,14 @@ public class Projectile : MonoBehaviour
             return;
         }
 
+        if (Other.TryGetComponent<EnemyController>(out EnemyController enemy))
+        {
+            enemy.TakeHit();
+
+            Destroy(gameObject);
+            return;
+        }
+
         if (Other.TryGetComponent<TotemHole>(out TotemHole hole))
         {
             hole.RegisterHit();
