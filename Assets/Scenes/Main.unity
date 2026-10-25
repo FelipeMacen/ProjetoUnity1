@@ -2159,7 +2159,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.49803925, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2289,6 +2289,9 @@ MonoBehaviour:
   damageInterval: 1
   livesText: {fileID: 1934941577}
   gameManager: {fileID: 1642707732}
+  hitFlashColor: {r: 1, g: 1, b: 1, a: 1}
+  flashDuration: 0.06
+  flashInterval: 0.01
 --- !u!1 &1934941575
 GameObject:
   m_ObjectHideFlags: 0
