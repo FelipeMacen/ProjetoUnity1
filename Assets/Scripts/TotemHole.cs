@@ -30,6 +30,11 @@ public class TotemHole : MonoBehaviour
             Destroy(this.transform.parent.gameObject);
         }
 
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.RegisterTotemHit();
+        }
+
         Debug.Log("Acertou o buraco do totem!");
     }
 }
