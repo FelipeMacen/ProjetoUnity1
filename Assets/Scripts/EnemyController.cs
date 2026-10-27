@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private Transform player;
+    private Transform player;
     [SerializeField] private float speed = 3f;
 
     private Rigidbody2D rb;
@@ -40,5 +40,16 @@ public class EnemyController : MonoBehaviour
         Debug.Log("Inimigo morto");
 
         Destroy(gameObject);
+
+        if (WaveManager.Instance != null)
+        {
+            WaveManager.Instance.EnemyDefeated();
+        };
+    }
+
+    public void Initialize(Transform target, float movementSpeed)
+    {
+       player = target;
+       speed =  movementSpeed;
     }
 }

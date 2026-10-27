@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     private bool gameIsOver;
 
+    public bool IsGameOver => gameIsOver;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
