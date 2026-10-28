@@ -7,14 +7,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 7f;
 
     [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private float projectileSpeed = 5f;
+    [SerializeField] private float projectileSpeed = 6f;
 
     [SerializeField] private float spawnOffset = 0.9f;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
 
-    private Vector2 lastMoveDirection = Vector2.right;
+    private Vector2 mouseDirection = Vector2.right;
 
     private void Awake()
     {
@@ -53,13 +53,12 @@ public class PlayerController : MonoBehaviour
         //moveInput = direction.normalized;
         moveInput = direction;
 
-        if (moveInput.sqrMagnitude > 0f)
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            lastMoveDirection = moveInput;
-        }
+            Vector2 mouseTela = Mouse.current.position.ReadValue();
+            Vector2 mouseMundo = Camera.main.ScreenToWorldPoint(mouseTela);
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
+            mouseDirection = (mouseMundo - rb.position).normalized;
             Shoot();
         }
     }
@@ -77,7 +76,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        Vector2 spawnPosition = rb.position + lastMoveDirection * spawnOffset;
+        Vector2 spawnPosition = (rb.position + mouseDirection) * spawnOffset;
 
         GameObject projectile = Instantiate(projectilePrefab, new Vector3(spawnPosition.x, spawnPosition.y, 0f), Quaternion.identity);
 
@@ -91,7 +90,7 @@ public class PlayerController : MonoBehaviour
             return; 
         }
 
-        projectileRb.linearVelocity = lastMoveDirection * projectileSpeed;
+        projectileRb.linearVelocity = mouseDirection * projectileSpeed;
 
 
     }
