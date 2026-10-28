@@ -2,7 +2,11 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-      private void OnTriggerEnter2D(Collider2D Other)
+    void Start()
+    {
+        Destroy(gameObject, 1.2f);
+    }
+    private void OnTriggerEnter2D(Collider2D Other)
     {
         if (CompareTag("TotemFrame"))
         {

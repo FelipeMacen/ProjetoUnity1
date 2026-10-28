@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -13,10 +12,10 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
 
     [Header("Configurações das ondas")]
-    [SerializeField] private int startingEnemies = 3;
-    [SerializeField] private float initialEnemySpeed = 2f;
+    [SerializeField] private int startingEnemies = 5;
+    [SerializeField] private float initialEnemySpeed = 3.5f;
     [SerializeField] private float speedIncreaseWave = 0.25f;
-    [SerializeField] private float timeBetweenWaves = 2f;
+    [SerializeField] private float timeBetweenWaves = 0.3f;
 
     private int currentWave;
     private int enemiesRemaining;
@@ -79,7 +78,11 @@ public class WaveManager : MonoBehaviour
 
             int index = Random.Range(0, avaiableSpawnPoints.Count);
 
+            avaiableSpawnPoints[index].position += player.position; 
+
             Transform spawnPoint = avaiableSpawnPoints[index];
+
+            avaiableSpawnPoints[index].position -= player.position;
 
             avaiableSpawnPoints.RemoveAt(index);
 
