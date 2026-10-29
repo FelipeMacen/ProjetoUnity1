@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+
+    [SerializeField] private GameObject hitEffectPrefab;
+
     void Start()
     {
         Destroy(gameObject, 1.2f);
@@ -15,6 +18,8 @@ public class Projectile : MonoBehaviour
 
         if (Other.TryGetComponent<EnemyController>(out EnemyController enemy))
         {
+            SpawnHitEffect(transform.position);
+
             enemy.TakeHit();
 
             Destroy(gameObject);
@@ -24,8 +29,15 @@ public class Projectile : MonoBehaviour
         if (Other.TryGetComponent<TotemHole>(out TotemHole hole))
         {
             hole.RegisterHit();
+
+            SpawnHitEffect(transform.position);
         }
 
         Destroy(gameObject);
+    }
+
+    private void SpawnHitEffect(Vector3 position)
+    {
+        Instantiate(hitEffectPrefab, position, Quaternion.identity);
     }
 }
