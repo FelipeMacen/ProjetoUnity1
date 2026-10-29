@@ -28,6 +28,7 @@ public class TotemHole : MonoBehaviour
             spriteRenderer.color = hitcolor;
             await Task.Delay(100);
             Destroy(this.transform.parent.gameObject);
+            TotemManager.Instance.totensRemainig--;
         }
 
         if (GameManager.Instance != null)
