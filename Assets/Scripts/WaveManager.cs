@@ -76,17 +76,18 @@ public class WaveManager : MonoBehaviour
                 avaiableSpawnPoints.AddRange(spawnPoints);
             }
 
-            int index = Random.Range(0, avaiableSpawnPoints.Count);
-
-            avaiableSpawnPoints[index].position += player.position; 
+            int index = Random.Range(0, avaiableSpawnPoints.Count); 
 
             Transform spawnPoint = avaiableSpawnPoints[index];
 
-            avaiableSpawnPoints[index].position -= player.position;
+            spawnPoint.position += player.position;
 
-            avaiableSpawnPoints.RemoveAt(index);
 
             GameObject enemyObject = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
+
+            spawnPoint.position -= player.position;
+
+            avaiableSpawnPoints.RemoveAt(index);
 
             EnemyController enemy = enemyObject.GetComponent<EnemyController>();
 

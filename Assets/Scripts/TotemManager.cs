@@ -6,6 +6,7 @@ public class TotemManager : MonoBehaviour
     public static TotemManager Instance {get; set;}
     [SerializeField] private GameObject totemPrefab;
     [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private Transform player;
 
     public int totensRemainig = 8;
 
@@ -48,9 +49,13 @@ public class TotemManager : MonoBehaviour
 
             Transform spawnPoint = avaiableSpawns[index];
 
-            avaiableSpawns.RemoveAt(index);
+            spawnPoint.position += player.position;
 
             GameObject totemObject = Instantiate(totemPrefab, spawnPoint.position, Quaternion.identity);
+
+            spawnPoint.position -= player.position;
+
+            avaiableSpawns.RemoveAt(index);
         }
     }
 
