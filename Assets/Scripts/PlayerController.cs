@@ -55,10 +55,6 @@ public class PlayerController : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            Vector2 mouseTela = Mouse.current.position.ReadValue();
-            Vector2 mouseMundo = Camera.main.ScreenToWorldPoint(mouseTela);
-
-            mouseDirection = (mouseMundo - rb.position).normalized;
             Shoot();
         }
     }
@@ -76,7 +72,13 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        Vector2 spawnPosition = (rb.position + mouseDirection) * spawnOffset;
+        Vector2 cameraposition = Camera.main.transform.position;
+
+        Vector2 mouseTela = Mouse.current.position.ReadValue();
+        Vector2 mouseMundo = Camera.main.ScreenToWorldPoint(mouseTela);
+        mouseDirection = (mouseMundo - rb.position).normalized;
+
+        Vector2 spawnPosition = rb.position + mouseDirection * spawnOffset;
 
         GameObject projectile = Instantiate(projectilePrefab, new Vector3(spawnPosition.x, spawnPosition.y, 0f), Quaternion.identity);
 
